@@ -1,0 +1,25 @@
+name: event_hive
+description: A companion package for event_db that implements a HiveRepository.
+version: 0.1.0
+homepage: https://github.com/VHCBlade/event_hive
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  event_bloc: ^4.2.0
+  event_db: ^0.1.0
+
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
