@@ -19,7 +19,7 @@ class HiveRepository extends DatabaseRepository {
     final completer = Completer();
     initialized = completer.future;
     super.initialize(channel);
-    Hive.initFlutter();
+    await Hive.initFlutter();
     typeAdapters.forEach((element) => element.register());
     completer.complete();
   }
