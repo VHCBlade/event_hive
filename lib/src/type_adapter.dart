@@ -8,7 +8,7 @@ typedef TypeMapper = int? Function(String);
 class GenericTypeAdapter<T extends GenericModel> extends TypeAdapter<T> {
   final T Function() generator;
   late final T instance = generator();
-  final TypeMapper? typeMapper;
+  final TypeMapper typeMapper;
 
   /// This allows you to register Hive models without needing to extend
   /// each Model.
@@ -18,7 +18,7 @@ class GenericTypeAdapter<T extends GenericModel> extends TypeAdapter<T> {
   ///
   /// [typeMapper] is an optional parameter to define how you want your type
   /// to be converted to an id. If not provided, it will use the hashcode of the type
-  GenericTypeAdapter(this.generator, [this.typeMapper]);
+  GenericTypeAdapter(this.generator, this.typeMapper);
 
   void register() {
     Hive.registerAdapter<T>(this);
@@ -34,11 +34,7 @@ class GenericTypeAdapter<T extends GenericModel> extends TypeAdapter<T> {
 
   @override
   int get typeId {
-    if (typeMapper == null) {
-      return instance.type.hashCode;
-    }
-
-    final typeId = typeMapper!(instance.type);
+    final typeId = typeMapper(instance.type);
 
     if (typeId == null) {
       throw ArgumentError('${instance.type} is not defined!');

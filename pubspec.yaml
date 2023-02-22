@@ -1,6 +1,6 @@
 name: event_hive
 description: A companion package for event_db that implements a HiveRepository.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/VHCBlade/event_hive
 
 environment:
