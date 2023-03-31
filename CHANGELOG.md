@@ -1,3 +1,7 @@
+## 0.1.5
+
+* Added overrideType property that defaults to false. Set to true if it's possible that the initialize function will be called multiple times.
+
 ## 0.1.4
 
 * Added BaseHiveRepository and base_event_hive.dart for use in non-Flutter environments.

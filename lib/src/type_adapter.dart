@@ -9,6 +9,7 @@ class GenericTypeAdapter<T extends GenericModel> extends TypeAdapter<T> {
   final T Function() generator;
   late final T instance = generator();
   final TypeMapper typeMapper;
+  final bool overrideType;
 
   /// This allows you to register Hive models without needing to extend
   /// each Model.
@@ -18,10 +19,11 @@ class GenericTypeAdapter<T extends GenericModel> extends TypeAdapter<T> {
   ///
   /// [typeMapper] is an optional parameter to define how you want your type
   /// to be converted to an id. If not provided, it will use the hashcode of the type
-  GenericTypeAdapter(this.generator, this.typeMapper);
+  GenericTypeAdapter(this.generator, this.typeMapper,
+      [this.overrideType = false]);
 
   void register() {
-    Hive.registerAdapter<T>(this);
+    Hive.registerAdapter<T>(this, override: true);
   }
 
   @override
