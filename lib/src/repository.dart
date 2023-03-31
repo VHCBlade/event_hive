@@ -33,13 +33,7 @@ class HiveRepository extends DatabaseRepository {
   Future<T> saveModel<T extends GenericModel>(String database, T model) async {
     final box = await openBox(database);
 
-    if (model.id == null) {
-      final newId = await box.add(model);
-      model.id = '${model.type}::$newId';
-      await box.delete(newId);
-    }
-
-    await box.put(model.id, model);
+    await box.put(model.autoGenId, model);
     return model;
   }
 
@@ -71,11 +65,11 @@ class HiveRepository extends DatabaseRepository {
   @override
   Future<Iterable<T>> findAllModelsOfType<T extends GenericModel>(
       String database, T Function() supplier) async {
-    final type = supplier().type;
+    final newModel = supplier();
 
     final box = await openBox(database);
     return Future.wait(box.keys
-        .where((val) => '$val'.startsWith('$type::'))
+        .where((val) => '$val'.startsWith(newModel.prefixTypeForId("")))
         .map((key) async => (await box.get(key)) as T));
   }
 
