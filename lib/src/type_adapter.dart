@@ -23,7 +23,7 @@ class GenericTypeAdapter<T extends GenericModel> extends TypeAdapter<T> {
       [this.overrideType = false]);
 
   void register() {
-    Hive.registerAdapter<T>(this, override: true);
+    Hive.registerAdapter<T>(this, override: overrideType);
   }
 
   @override
