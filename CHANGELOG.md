@@ -1,3 +1,7 @@
+## 0.1.4
+
+* Added BaseHiveRepository and base_event_hive.dart for use in non-Flutter environments.
+
 ## 0.1.3
 
 * Upgraded minimum necessary event_db package to 0.1.3
