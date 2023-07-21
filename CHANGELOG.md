@@ -1,3 +1,7 @@
+## 0.1.6
+
+* Added concrete implementation of saveModels in BaseHiveRepository 
+
 ## 0.1.5+1
 
 * Added overrideType property that defaults to false. Set to true if it's possible that the initialize function will be called multiple times.

@@ -30,12 +30,22 @@ abstract class BaseHiveRepository extends DatabaseRepository {
   }
 
   FutureOr<LazyBox> openBox(String database);
+
   @override
   Future<T> saveModel<T extends GenericModel>(String database, T model) async {
     final box = await openBox(database);
 
     await box.put(model.autoGenId, model);
     return model;
+  }
+
+  @override
+  Future<void> saveModels<T extends GenericModel>(
+      String database, Iterable<T> models) async {
+    final box = await openBox(database);
+
+    final map = {for (var v in models) v.autoGenId: v};
+    await box.putAll(map);
   }
 
   @override
