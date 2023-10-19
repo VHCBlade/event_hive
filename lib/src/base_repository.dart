@@ -32,7 +32,7 @@ abstract class BaseHiveRepository extends DatabaseRepository {
   FutureOr<LazyBox> openBox(String database);
 
   @override
-  Future<T> saveModel<T extends GenericModel>(String database, T model) async {
+  Future<T> saveModel<T extends BaseModel>(String database, T model) async {
     final box = await openBox(database);
 
     await box.put(model.autoGenId, model);
@@ -40,7 +40,7 @@ abstract class BaseHiveRepository extends DatabaseRepository {
   }
 
   @override
-  Future<void> saveModels<T extends GenericModel>(
+  Future<void> saveModels<T extends BaseModel>(
       String database, Iterable<T> models) async {
     final box = await openBox(database);
 
@@ -49,7 +49,7 @@ abstract class BaseHiveRepository extends DatabaseRepository {
   }
 
   @override
-  Future<bool> deleteModel<T extends GenericModel>(
+  Future<bool> deleteModel<T extends BaseModel>(
       String database, T model) async {
     if (model.id == null) {
       return false;
@@ -66,15 +66,14 @@ abstract class BaseHiveRepository extends DatabaseRepository {
   }
 
   @override
-  Future<T?> findModel<T extends GenericModel>(
-      String database, String key) async {
+  Future<T?> findModel<T extends BaseModel>(String database, String key) async {
     final box = await openBox(database);
     final result = await box.get(key);
     return result as T?;
   }
 
   @override
-  Future<Iterable<T>> findAllModelsOfType<T extends GenericModel>(
+  Future<Iterable<T>> findAllModelsOfType<T extends BaseModel>(
       String database, T Function() supplier) async {
     final newModel = supplier();
 

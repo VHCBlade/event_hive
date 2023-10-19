@@ -1,3 +1,7 @@
+## 0.2.0
+
+* BREAKING CHANGE: Upgraded event_db to 0.2.0
+
 ## 0.1.6
 
 * Added concrete implementation of saveModels in BaseHiveRepository 
